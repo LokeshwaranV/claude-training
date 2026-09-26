@@ -1,0 +1,247 @@
+.patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.patient-info h3 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.specialty-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specialty-selector label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.specialty-selector select {
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+}
+
+.specialty-selector select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 143, 191, 0.15);
+}
+
+.patient-display {
+  background: rgba(15, 143, 191, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  font-size: 13px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.patient-display::-webkit-scrollbar {
+  width: 4px;
+}
+
+.patient-display::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.info-item {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.info-item strong {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.info-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.info-item li {
+  color: var(--text-secondary);
+  padding: 4px 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-item li:before {
+  content: '▸';
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.empty-patient {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 24px 12px;
+  font-size: 13px;
+}
+
+.edit-button {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.edit-button:hover {
+  background: var(--border);
+  border-color: var(--primary);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.patient-form {
+  background: rgba(15, 143, 191, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.patient-form::-webkit-scrollbar {
+  width: 4px;
+}
+
+.patient-form::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  transition: all var(--transition-fast);
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(15, 143, 191, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 50px;
+}
+
+.save-button {
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+}
+
+@media (max-width: 768px) {
+  .patient-info {
+    gap: 12px;
+  }
+
+  .patient-display {
+    max-height: 200px;
+  }
+
+  .patient-form {
+    max-height: 300px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 13px;
+  }
+}

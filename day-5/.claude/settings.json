@@ -1,0 +1,122 @@
+{
+  "version": "1.0",
+  "hooks": {
+    "before-bash": {
+      "enabled": true,
+      "description": "Run checks before bash execution"
+    },
+    "after-bash": {
+      "enabled": true,
+      "description": "Validate bash output"
+    },
+    "before-edit": {
+      "enabled": true,
+      "description": "Check file syntax before edit"
+    },
+    "after-commit": {
+      "enabled": true,
+      "description": "Run tests after git commit"
+    }
+  },
+  "agents": {
+    "frontend-agent": {
+      "enabled": true,
+      "model": "claude-opus-5-5",
+      "max_tokens": 4096,
+      "tools": ["Bash", "Read", "Edit", "Write"],
+      "isolation": "worktree",
+      "memory_limit": "2048"
+    },
+    "backend-agent": {
+      "enabled": true,
+      "model": "claude-opus-5-5",
+      "max_tokens": 4096,
+      "tools": ["Bash", "Read", "Edit", "Write"],
+      "isolation": "worktree",
+      "memory_limit": "2048"
+    },
+    "triage-agent": {
+      "enabled": true,
+      "model": "claude-opus-5-5",
+      "max_tokens": 8192,
+      "tools": ["Bash", "Read", "Edit", "Write", "Agent"],
+      "isolation": "remote",
+      "memory_limit": "4096"
+    }
+  },
+  "context_trimming": {
+    "enabled": true,
+    "summary_ratio": 0.15,
+    "keep_recent_prompts": 10,
+    "compression_level": "medium"
+  },
+  "plugins": {
+    "internal": [
+      "code-review",
+      "simplify",
+      "security-review",
+      "enterprise-review"
+    ],
+    "external": {
+      "enabled": true,
+      "marketplace": "https://claude.com/plugins"
+    }
+  },
+  "observability": {
+    "enabled": true,
+    "tracing": {
+      "exporter": "otlp",
+      "endpoint": "http://localhost:4317",
+      "sample_rate": 1.0
+    },
+    "metrics": {
+      "enabled": true,
+      "interval_seconds": 60
+    },
+    "logging": {
+      "level": "INFO",
+      "format": "json"
+    }
+  },
+  "rag_engine": {
+    "enabled": true,
+    "backend": "llamaindex",
+    "vector_db": "chromadb",
+    "embedding_model": "text-embedding-3-small",
+    "chunk_size": 512,
+    "overlap": 50
+  },
+  "mcp_servers": {
+    "enabled": true,
+    "servers": [
+      {
+        "name": "healthcare-tools",
+        "type": "local",
+        "endpoint": "stdio",
+        "command": "python -m mcp_servers.healthcare"
+      }
+    ]
+  },
+  "api_keys": {
+    "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+    "GROQ_API_KEY": "${GROQ_API_KEY}"
+  },
+  "environment": {
+    "DEBUG": false,
+    "LOG_LEVEL": "INFO",
+    "MAX_CONTEXT_TOKENS": 12000,
+    "ISOLATION_MODE": "strict"
+  },
+  "performance": {
+    "cache_enabled": true,
+    "cache_ttl": 3600,
+    "async_operations": true,
+    "batch_processing": true
+  },
+  "compliance": {
+    "hipaa": true,
+    "audit_logging": true,
+    "data_retention_days": 30,
+    "encryption": "AES-256"
+  }
+}
