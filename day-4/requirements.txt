@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+pytest
+httpx<0.28
+mcp
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp
+locust
+groq==1.7.0

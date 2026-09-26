@@ -1,0 +1,47 @@
+# {{PROJECT_NAME}} — Governing Rules
+
+This file documents the non-negotiable rules that every agent
+({{AGENT_LIST}}) and every generated response in this project must follow.
+It exists so that any sub-agent, reviewer, or future contributor can check
+compliance without re-reading the full spec/case-study.
+
+## The commitments
+
+1. **{{COMMITMENT_1_NAME}}** — {{COMMITMENT_1_DESCRIPTION}}
+2. **{{COMMITMENT_2_NAME}}** — {{COMMITMENT_2_DESCRIPTION}}
+3. **Structured output** — responses conform to the fixed schema below.
+   Free-text answers are a bug.
+4. **Fail gracefully** — if evidence/confidence is insufficient, return a
+   `refused`/`escalated` response instead of fabricating an answer.
+5. **{{COMMITMENT_5_NAME}}** — {{COMMITMENT_5_DESCRIPTION}}
+
+## Response schema
+
+```json
+{
+  "answer": "string | null",
+  "confidence": "high | medium | low",
+  "citations": [
+    {"document_id": "string", "chunk_id": "string", "source_type": "{{SOURCE_TYPE_ENUM}}"}
+  ],
+  "caveats": ["string"],
+  "status": "answered | refused | escalated"
+}
+```
+
+## Source registry expectations
+
+Every ingested document must carry:
+- `source_type` ({{SOURCE_TYPE_ENUM}})
+- `approved` (bool) — enforced allowlist flag
+- `version` / `superseded_by` — to catch version drift
+- `ingested_at`
+
+## Agent responsibilities
+
+- **backend agent**: ingestion, retrieval, grounding, schema enforcement.
+- **frontend agent**: query UI, citation display, confidence indicators.
+- **triage agent**: read-only review of diffs against these commitments;
+  reports pass/fail, never edits code directly.
+
+See `docs/AIDLC_PLAN.md` (or equivalent) for the full step-by-step build plan.

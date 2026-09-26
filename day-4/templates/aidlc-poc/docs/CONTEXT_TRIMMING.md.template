@@ -1,0 +1,25 @@
+# Context trimming policy (Step 8)
+
+Each sub-agent's isolated state file (`.claude/state/<agent>.md`, see Step 6)
+is split into two parts so it never grows unbounded — see
+`.claude/state/README.md` for the format.
+
+## Rule
+
+- Anything older than the last 8-10 logged turns gets folded into `## Summary`
+  — compress, don't append. The summary should stay near 12-15% of the
+  agent's total context budget; if it grows past that, compress harder
+  (drop resolved details, keep decisions and open questions).
+- `## Recent turns` never exceeds 8-10 entries — oldest entries roll off into
+  the summary as new ones are added, they are not just deleted.
+- This applies per agent independently — each agent trims only its own file,
+  per the isolation rule in `.claude/agents/*.md.template`.
+- A read-only reviewer agent (e.g. triage) is the exception: keep its log
+  append-only (one line per review), not a summary+turns file, since audit
+  value comes from keeping every entry.
+
+## Continuation prompt
+
+`docs/NEXT_SESSION_PROMPT.md` holds the up-to-date prompt for resuming
+{{PROJECT_NAME}} in a fresh session. Update it after finishing each step so a
+new session can pick up without re-deriving context from scratch.

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -Eqi '(api[_-]?key|secret|password|BEGIN (RSA|EC|OPENSSH) PRIVATE KEY)'; then echo 'Blocked: command input looks like it may contain a secret.' >&2; exit 1; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mkdir -p \"$CLAUDE_PROJECT_DIR/.claude\" && echo \"[$(date -u +%FT%TZ)] tool=$CLAUDE_TOOL_NAME file_edited\" >> \"$CLAUDE_PROJECT_DIR/.claude/audit.log\""
+          }
+        ]
+      }
+    ]
+  }
+}
